@@ -8,46 +8,46 @@ pipeline {
       dockerImage = ''
     }
 
-    stages {
-      /* Clone de repo */
-      stage('Checkout SCM') {
+  stages {
+    /* Clone de repo */
+    stage('Checkout SCM') {
+    steps {
+      git branch: 'develop',
+      url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+      }
+    }
+    /* Get into coding dir then build ther image */
+    stage('Build image') {
+      steps{
+        script {
+            dockerImage = docker.build("${imageName}:${env.BUILD_ID}",
+            "./coding/checkSystemService")
+        }
+      }
+    }
+    /* Push image to registry */
+    stage('Push image') {
       steps {
-        git branch: 'develop',
-        url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
-        }
-      }
-      /* Get into coding dir then build ther image */
-      stage('Build image') {
-        steps{
-          script {
-              dockerImage = docker.build("${imageName}:${env.BUILD_ID}",
-              "./coding/checkSystemService")
+        script {
+          docker.withRegistry('', 'dockerhub_id') {
+            dockerImage.push("${BUILD_NUMBER}")
+            dockerImage.push('latest')
           }
         }
       }
-      /* Push image to registry */
-      stage('Push image') {
-        steps {
-          script {
-            docker.withRegistry('', 'dockerhub_id') {
-              dockerImage.push("${BUILD_NUMBER}")
-              dockerImage.push('latest')
-            }
-          }
-        }
+    }
+    /* Test the container running state */
+    stage ('Test image') {
+      dockerImage.inside {
+        sh "echo 'Hello from the inside'; echo \$?"
       }
-      /* Test the container running state */
-      stage ('Test image')
-        dockerImage.inside {
-          sh "echo 'Hello from the inside'; echo \$?"
-        }
-      }
+    }
 
-      stage('Cleaning up') {
-        steps{
-          sh "docker rmi '${imageName}:${BUILD_NUMBER}'"
-          sh "docker rmi '${imageName}:latest'"
-        }
+    stage('Cleaning up') {
+      steps{
+        sh "docker rmi '${imageName}:${BUILD_NUMBER}'"
+        sh "docker rmi '${imageName}:latest'"
       }
+    }
   }
 }
