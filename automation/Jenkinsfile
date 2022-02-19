@@ -36,6 +36,13 @@ pipeline {
           }
         }
       }
+      /* Test the container running state */
+      stage ('Test image')
+        dockerImage.inside {
+          sh "echo 'Hello from the inside'; echo $?"
+        }
+      }
+
       stage('Cleaning up') {
         steps{
           sh "docker rmi '${imageName}:${BUILD_NUMBER}'"
