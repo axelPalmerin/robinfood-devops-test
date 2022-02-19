@@ -5,6 +5,7 @@ ADD . /robinfood-devops-test/coding/checkSystemService
 WORKDIR /checkSystemService
 
 # Install pip-tools for manage third-party package dependencies.
+RUN ls -lrth
 RUN pip install -U pip pip-tools && \
     pip install --no-cache-dir -r requirements.txt && \
     rm -rf requirements.txt
