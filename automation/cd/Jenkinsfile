@@ -1,0 +1,10 @@
+pipeline {
+  /* Running the pipeline on docker slave node */
+  agent {
+      label 'slaveNode1'
+  }
+  environment {
+      imageName = "axelherrera/pytest"
+      dockerImage = ''
+    }
+}
