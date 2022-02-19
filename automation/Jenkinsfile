@@ -1,5 +1,5 @@
 pipeline {
-  // Running the pipeline on docker slave node
+  /* Running the pipeline on docker slave node */
   agent {
       label 'slaveNode1'
   }
@@ -9,38 +9,37 @@ pipeline {
     }
 
     stages {
-      // Clone de repo
+      /* Clone de repo */
       stage('Checkout SCM') {
       steps {
         git branch: 'develop',
         url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
         }
       }
-      // Get into coding dir then build ther image
+      /* Get into coding dir then build ther image */
       stage('Build image') {
         steps{
           script {
-            dir('coding/checkSystemService') {
-              dockerImage = docker.build($imageName, '.')
-            }
+              dockerImage = docker.build("${imageName}:${env.BUILD_ID}",
+              "./coding/checkSystemService")
           }
         }
       }
-      // Push image to registry
+      /* Push image to registry */
       stage('Push image') {
         steps {
           script {
             docker.withRegistry('', 'dockerhub_id') {
               dockerImage.push("${BUILD_NUMBER}")
-              dockerImage.push("latest")
+              dockerImage.push('latest')
             }
           }
         }
       }
       stage('Cleaning up') {
         steps{
-          sh "docker rmi  ${imageName}+":${BUILD_NUMBER}"
-          sh "docker rmi  ${imageName}+"latest"
+          sh "docker rmi "${imageName}:${BUILD_NUMBER}"
+          sh "docker rmi "${imageName}:latest"
         }
       }
   }
