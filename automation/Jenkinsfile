@@ -1,0 +1,51 @@
+pipeline {
+  // Running the pipeline on docker slave node
+  agent {
+      label 'slaveNode1'
+  }
+  environment {
+      dockerImage = ''
+      registry = "axelherrera/test"
+      app = "microservice"
+    }
+
+    stages {
+      // Clone de repo
+      stage('Checkout SCM') {
+      steps {
+        git branch: 'develop',
+        credentialsId: '',
+        url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+        }
+      }
+      // Get into coding dir then build ther image
+      stage('Build image') {
+        steps{
+          script {
+            dir('coding/checkSystemService') {
+              //dockerImage = docker.build app + ":$BUILD_NUMBER"
+              dockerImage = docker.build(registry,".")
+            }
+          }
+        }
+      }
+
+      // Push image to registry
+      stage('Push image') {
+        steps{
+          script{
+            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub_id') {
+              dockerImage.push("${env.BUILD_NUMBER}")
+              dockerImage.push("latest")
+            }
+          }
+        }
+      }
+
+      stage('Cleaning up') {
+        steps{
+          sh "docker rmi app + ":$BUILD_NUMBER"
+          }
+      }
+  }
+}
