@@ -13,4 +13,4 @@ RUN pip install -U pip pip-tools && \
 # For rebuild the container for installing new libraries with pip-tool run:
 # docker run -rm <CONTAINER> pip-compile requirements.in
 
-ENTRYPOINT ['pytest', 'u', 'main.py']
+ENTRYPOINT ['pytest', '-v', 'main.py']
