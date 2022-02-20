@@ -10,7 +10,7 @@ from defs import constants as c
 class CheckSystem(object):
 
     def __init__(self):
-        runTests = Test()
+        runTests = TestCases()
 
 if __name__ == "__main__":
     CheckSystem()

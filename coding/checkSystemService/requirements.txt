@@ -20,7 +20,5 @@ pytest==7.0.1
     # via pytest-testinfra
 pytest-testinfra==6.6.0
     # via -r requirements.in
-tomli==2.0.1
+tomli==1.2.3
     # via pytest
-xmlrunner==1.7.7
-    # via -r requirements.in

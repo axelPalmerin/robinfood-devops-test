@@ -25,20 +25,8 @@ pipeline {
         }
       }
     }
-
-    /* Test the container running state */
-    stage ('Test image') {
-      steps{
-        script {
-          dockerImage.inside {
-            sh "echo 'Hello from the inside'; echo \$?"
-          }
-        }
-      }
-    }
-
     /* Push image to registry */
-    /*stage('Push image') {
+    stage('Push image') {
       steps {
         script {
           docker.withRegistry('', 'dockerhub_id') {
@@ -47,7 +35,8 @@ pipeline {
           }
         }
       }
-    }*/
+    }
+
     stage('Cleaning up') {
       steps{
         sh "docker rmi '${imageName}:${BUILD_NUMBER}'"
