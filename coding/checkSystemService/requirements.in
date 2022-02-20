@@ -1,2 +1,2 @@
-testinfra
+pytest-testinfra
 xmlrunner
