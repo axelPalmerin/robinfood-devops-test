@@ -37,9 +37,8 @@ pipeline {
       }
     }
 
-/*
     /* Push image to registry */
-    stage('Push image') {
+    /*stage('Push image') {
       steps {
         script {
           docker.withRegistry('', 'dockerhub_id') {
@@ -48,8 +47,7 @@ pipeline {
           }
         }
       }
-    }
-*/
+    }*/
     stage('Cleaning up') {
       steps{
         sh "docker rmi '${imageName}:${BUILD_NUMBER}'"
