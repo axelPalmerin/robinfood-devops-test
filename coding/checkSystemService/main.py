@@ -4,8 +4,6 @@
 This microservice checks some automated system valitations using pytest.
 """
 
-import time
-
 from tests.tests import TestCases
 from defs import constants as c
 
@@ -16,4 +14,3 @@ class CheckSystem(object):
 
 if __name__ == "__main__":
     CheckSystem()
-    time.sleep(20)
