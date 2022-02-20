@@ -6,7 +6,7 @@ This microservice checks some automated system valitations using pytest.
 
 import time
 
-from tests.test import TestCases
+from tests.tests import TestCases
 from defs import constants as c
 
 class CheckSystem(object):
