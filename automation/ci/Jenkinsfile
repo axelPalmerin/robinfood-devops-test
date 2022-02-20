@@ -25,6 +25,18 @@ pipeline {
         }
       }
     }
+
+    /* Test the container running state */
+    stage ('Test image') {
+      steps{
+        script {
+          dockerImage.inside {
+            sh "echo 'Hello from the inside'; echo \$?"
+          }
+        }
+      }
+    }
+    
     /* Push image to registry */
     stage('Push image') {
       steps {
@@ -32,16 +44,6 @@ pipeline {
           docker.withRegistry('', 'dockerhub_id') {
             dockerImage.push("${BUILD_NUMBER}")
             dockerImage.push('latest')
-          }
-        }
-      }
-    }
-    /* Test the container running state */
-    stage ('Test image') {
-      steps{
-        script {
-          dockerImage.inside {
-            sh "echo 'Hello from the inside'; echo \$?"
           }
         }
       }
