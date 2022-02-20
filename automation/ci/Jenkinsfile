@@ -39,8 +39,10 @@ pipeline {
     /* Test the container running state */
     stage ('Test image') {
       steps{
-        dockerImage.inside {
-          sh "echo 'Hello from the inside'; echo \$?"
+        script {
+          dockerImage.inside {
+            sh "echo 'Hello from the inside'; echo \$?"
+          }
         }
       }
     }
