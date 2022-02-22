@@ -101,9 +101,6 @@ pip install virtualenv
 ❯ rm -rf myvenv
 ```
 
-<i>At this point we've ended up the Basics :'D</i>
-
-
 ### 2. Infrastructure
 
 #### Architecture Overview
