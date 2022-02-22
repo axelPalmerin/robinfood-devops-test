@@ -1,9 +1,12 @@
+ /* Jenkins declarative CI pipeline */
+
 pipeline {
   /* Running the pipeline on docker slave node */
   agent { label 'slaveNode1' }
+
   environment {
       imageName = "axelherrera/pytest"
-      dockerImage = ''
+      def dockerImage = ''
     }
 
   stages {
@@ -12,11 +15,12 @@ pipeline {
     }
     /* Clone de repo */
     stage('Checkout SCM') {
-    steps {
-      git branch: '${env.ENVIRONMENT}',
-      url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+      steps {
+        git branch: '${env.BRANCH_NAME}',
+        url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
       }
     }
+
     /* Get into coding dir then build ther image */
     stage('Build image') {
       steps{
@@ -37,7 +41,6 @@ pipeline {
         }
       }
     }
-
     stage('Cleaning up') {
       steps{
         sh "docker rmi '${imageName}:${BUILD_NUMBER}'"

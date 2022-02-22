@@ -1,44 +1,69 @@
+/* Jenkins declarative CD pipeline */
+
 pipeline {
   agent { label 'slaveNode1'}
-  options {
-    skipDefaultCheckout(true)
+
+  parameters {
+    booleanParam(name: 'autoApprove', defaultValue: false,
+      description: 'Atomaticamente publicar el plan de terraform?')
+    booleanParam(name: 'destroy', defaultValue: false,
+      description: 'Destruir el plan de terraform')
   }
-  stages{
-    stage('clean workspace') {
+  environment {
+    /* AWS credentials previosly setted on slave node */
+    // AWS_ACCESS_KEY_ID
+    // AWS_SECRET_ACCESS_KEY
+  }
+
+  stages {
+    stage('Clean workspace') {
       steps { cleanWs() }
     }
-    stage('checkout') {
+    stage('Checkout') {
       steps {
         steps {
-          git branch: '${env.ENVIRONMENT}',
-          url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+          dir("infra") {
+            git branch: '${env.BRANCH_NAME}',
+            url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+          }
         }
       }
     }
 
-    stage('Terraform Init') {
+    stage('Plan') {
       steps {
-        sh label: '', script: 'terraform init'
+        sh 'terraform init -input=false'
+        sh "terraform plan -input=false -out tfplan"
+        sh 'terraform show -no-color tfplan > tfplan.txt'
+      }
+    }
+
+    stage('Approval') {
+      /* Review plan and manual apply when Approval is False */
+      when { expression { !params.autoApprove } }
+      steps {
+        script {
+          def plan = readFile 'tfplan.txt'
+          input message: "Apply Terraform plan?",
+          parameters: [text(name: 'Plan', description: 'Review', defaultValue: plan)]
+        }
       }
    }
 
-   stage('Test') {
-         steps {
-           sh label: '', script: 'terraform validate'
-         }
-      }
-
-    stage('Deploy infra') {
+    stage('Apply') {
+      /* Apply plan when destroy is False */
+      when { expression { !params.destroy } }
       steps {
-        dir("../infra/terraform") {
-         sh label: '', script: 'terraform apply --auto-approve'
-        }
+        sh "terraform apply -input=false tfplan"
       }
     }
-  }
-  post {
-    always {
-      cleanWs()
+
+    stage('Destroy') {
+      /* Destroy if flag is true */
+      when { expression { params.destroy } }
+      steps {
+        sh "terraform destroy --auto-approve"
+      }
     }
   }
 }
