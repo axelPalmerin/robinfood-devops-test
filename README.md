@@ -138,11 +138,11 @@ terraform apply --auto-approve
 
 > Services
 
-<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  />
+<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  width="400" />
 
 > Tasks
 
-<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" />
+<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="400" />
 
 > Container
 
