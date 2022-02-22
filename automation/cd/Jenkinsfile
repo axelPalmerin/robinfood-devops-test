@@ -21,11 +21,9 @@ pipeline {
     }
     stage('Checkout') {
       steps {
-        steps {
           dir("infra") {
             git branch: 'develop',
             url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
-          }
         }
       }
     }
