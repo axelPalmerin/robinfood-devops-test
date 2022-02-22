@@ -1,3 +1,8 @@
+
+#
+# Infra code for deploy a service into ECS task within VPC and public subnet
+#
+
 # Creation of ECS cluster
 resource "aws_ecs_cluster" "ecs_cluster" {
   name = "ecs-cluster"
@@ -54,7 +59,7 @@ resource "aws_ecs_service" "pytest_service" {
 }
 
 #
-# ARN Role for logs
+# ARN Role for cloud watchlogs
 #
 
 resource "aws_iam_role" "ecsTaskExecutionRole" {

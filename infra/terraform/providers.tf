@@ -1,3 +1,6 @@
+
+# AWS and docker provider
+
 terraform {
   required_providers {
     docker = {
