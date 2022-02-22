@@ -160,7 +160,7 @@ terraform apply --auto-approve
 
 > Overview CI/CD
 
-<img src="https://github.com/axelPalmerin/images/blob/main/ppl_drawio.png?raw=true" />
+<img src="https://github.com/axelPalmerin/images/blob/main/ppl_drawio.png?raw=true" width="450"/>
 
 
 #### Build service with CI pipeline
@@ -185,15 +185,15 @@ terraform apply --auto-approve
 
 > Once Jenkins jobs are created, we run the CI flow.</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" width="400" />
+<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" width="350" />
 
 > File: automation/ci/Jenkinsfile
 
-<img src="https://github.com/axelPalmerin/images/blob/main/ci.png?raw=true" width="700"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/ci.png?raw=true" width="600"/>
 
 <p>A Docker image of the service is pulling in the public repository</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" width="400" />
+<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" width="250" />
 
 
 #### Deploy service with CD pipeline
@@ -204,7 +204,7 @@ terraform apply --auto-approve
 
 <p>The CD pipeline asks for automatically auto approve the terraform plan and eather keep or destroy the plan.</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true" />
+<img src="https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true" width="200" />
 
 > Running the Job:
 
