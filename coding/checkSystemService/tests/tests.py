@@ -18,13 +18,13 @@ class TestCases(object):
         assert c.host.file("main.py").is_file
 
     def test_requirements_exist(self):
-        assert c.host.file("requirements.txt").exist
+        assert c.host.file("requirements.txt").is_file
 
     def test_dockerfile_exist(self):
         assert c.host.file("Dockerfile").is_file
 
     def test_check_pip(s):
-        assert c.host.package("pip").is_installed
+        assert c.host.package("python3-pip").is_installed
 
     def test_python_pkg(s):
         assert c.host.package("python3").is_installed
