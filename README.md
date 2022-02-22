@@ -92,7 +92,7 @@ pip install virtualenv
 ❯ pytest -v main.py
 ```
 
-<img src="https://github.com/axelPalmerin/images/blob/main/pytest.png?raw=true" width="500"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/pytest.png?raw=true" width="400"/>
 
 
 #### Cleaning venv
@@ -134,27 +134,27 @@ terraform apply --auto-approve
 
 > ECS
 
-<img src="https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true" width="200" />
+<img src="https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true" width="150" />
 
 > Services
 
-<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  width="400" />
+<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  width="400"/>
 
 > Tasks
 
-<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="400" />
+<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="400"/>
 
 > Container
 
-<img src="https://github.com/axelPalmerin/images/blob/main/container.png?raw=true" width="400" />
+<img src="https://github.com/axelPalmerin/images/blob/main/container.png?raw=true" width="400"/>
 
 > CloudWatch
 
-<img src="https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true" width="200" />
+<img src="https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true" width="150" />
 
 > Logs
 
-<img src="https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true" width="500"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true" width="400"/>
 
 ### 3. Automation
 
@@ -180,12 +180,12 @@ terraform apply --auto-approve
 > Then a slave node was configured with Terraform and Docker for run CI/CD flows.
 
 
-<img src="https://github.com/axelPalmerin/images/blob/main/slave.png?raw=true" />
+<img src="https://github.com/axelPalmerin/images/blob/main/slave.png?raw=true" width="250" />
 
 
 > Once Jenkins jobs are created, we run the CI flow.</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" />
+<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" width="400" />
 
 > File: automation/ci/Jenkinsfile
 
@@ -193,7 +193,7 @@ terraform apply --auto-approve
 
 <p>A Docker image of the service is pulling in the public repository</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" />
+<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" width="400" />
 
 
 #### Deploy service with CD pipeline
