@@ -123,6 +123,37 @@ The main blocks of this infrastructure are the following:
 
 > Note: The microservice doesn't creates a server, just execute the pyTest.
 
+#### Building with terraform
+```
+terraform init
+terraform validate
+terraform plan
+terraform apply --auto-approve
+```
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/vpc.png?raw=true)
+> VPC
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true)
+> ECS
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true)
+> ECS
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/services.png?raw=true)
+> Services
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true)
+> Tasks
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/container.png?raw=true)
+> Container
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true)
+> CloudWatch
+
+![alt text](https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true)
+> Logs
 
 ### 3. Automation
 
