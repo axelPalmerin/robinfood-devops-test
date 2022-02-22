@@ -1,5 +1,6 @@
 ## Robinfood
-> DevOps Technical Test
+> DevOps Technical Test<br>
+> author: eric.gnome@gmail.com
 
 ### General info
 
@@ -60,7 +61,7 @@ will be deployed a microservice using DevOps methodologies into AWS Cloud.</p>
 ## Solution Design & Implementation
 
 ### Project repos
-> https://github.com/axelPalmerin/robinfood-devops-test
+https://github.com/axelPalmerin/robinfood-devops-test<br>
 https://hub.docker.com/repository/docker/axelherrera/pytest
 
  ### 1. Coding
@@ -91,7 +92,7 @@ pip install virtualenv
 ❯ pytest -v main.py
 ```
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/pytest.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/pytest.png?raw=true" width="500"/>
 
 
 #### Cleaning venv
@@ -109,7 +110,7 @@ pip install virtualenv
 
 The figure below shows the high-level architecture of the infrastructure we want to provision with Terraform
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/infra.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/infra.png?raw=true" width="500"/>
 
 > File: infra/terraform
 
@@ -130,36 +131,39 @@ terraform validate
 terraform plan
 terraform apply --auto-approve
 ```
-
-![alt text](https://github.com/axelPalmerin/images/blob/main/vpc.png?raw=true)
 > VPC
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/vpc.png?raw=true" width="400" />
+
 > ECS
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true)
-> ECS
+<img src="https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true" width="200" />
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/services.png?raw=true)
 > Services
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  />
+
 > Tasks
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/container.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" />
+
 > Container
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/container.png?raw=true" width="400" />
+
 > CloudWatch
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true" width="200" />
+
 > Logs
+
+<img src="https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true" width="500"/>
 
 ### 3. Automation
 
-> CI/CD
+> Overview CI/CD
 
-![alt text](ppl_drawio.png)
+<img src="https://github.com/axelPalmerin/images/blob/main/ppl_drawio.png?raw=true" />
 
 
 #### Build service with CI pipeline
@@ -179,19 +183,20 @@ terraform apply --auto-approve
 > Then a slave node was configured with Terraform and Docker for run CI/CD flows.
 
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/slave.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/slave.png?raw=true" />
 
-<p>Once Jenkins jobs are created, we run the CI flow.</p>
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true)
+> Once Jenkins jobs are created, we run the CI flow.</p>
+
+<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" />
 
 > File: automation/ci/Jenkinsfile
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/ci.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/ci.png?raw=true" width="700"/>
 
 <p>A Docker image of the service is pulling in the public repository</p>
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" />
 
 
 #### Deploy service with CD pipeline
@@ -202,8 +207,8 @@ terraform apply --auto-approve
 
 <p>The CD pipeline asks for automatically auto approve the terraform plan and eather keep or destroy the plan.</p>
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true" />
 
 > Running the Job:
 
-![alt text](https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true)
+<img src="https://github.com/axelPalmerin/images/blob/main/cd.png?raw=true" width="700"/>
