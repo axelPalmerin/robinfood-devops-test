@@ -9,11 +9,11 @@ pipeline {
     booleanParam(name: 'destroy', defaultValue: false,
       description: 'Destruir el plan de terraform')
   }
-  environment {
-    /* AWS credentials previosly setted on slave node */
-    // AWS_ACCESS_KEY_ID
-    // AWS_SECRET_ACCESS_KEY
-  }
+  /* AWS credentials previosly setted on slave node */
+  /*environment {
+     AWS_ACCESS_KEY_ID
+     AWS_SECRET_ACCESS_KEY
+  }*/
 
   stages {
     stage('Clean workspace') {
