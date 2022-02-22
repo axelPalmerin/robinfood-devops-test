@@ -1,10 +1,44 @@
 pipeline {
-  /* Running the pipeline on docker slave node */
-  agent {
-      label 'slaveNode1'
+  agent { label 'slaveNode1'}
+  options {
+    skipDefaultCheckout(true)
   }
-  environment {
-      imageName = "axelherrera/pytest"
-      dockerImage = ''
+  stages{
+    stage('clean workspace') {
+      steps { cleanWs() }
     }
+    stage('checkout') {
+      steps {
+        steps {
+          git branch: '${env.ENVIRONMENT}',
+          url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+        }
+      }
+    }
+
+    stage('Terraform Init') {
+      steps {
+        sh label: '', script: 'terraform init'
+      }
+   }
+
+   stage('Test') {
+         steps {
+           sh label: '', script: 'terraform validate'
+         }
+      }
+
+    stage('Deploy infra') {
+      steps {
+        dir("../infra/terraform") {
+         sh label: '', script: 'terraform apply --auto-approve'
+        }
+      }
+    }
+  }
+  post {
+    always {
+      cleanWs()
+    }
+  }
 }

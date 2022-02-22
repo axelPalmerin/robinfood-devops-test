@@ -1,18 +1,19 @@
 pipeline {
   /* Running the pipeline on docker slave node */
-  agent {
-      label 'slaveNode1'
-  }
+  agent { label 'slaveNode1' }
   environment {
       imageName = "axelherrera/pytest"
       dockerImage = ''
     }
 
   stages {
+    stage('clean workspace') {
+      steps { cleanWs() }
+    }
     /* Clone de repo */
     stage('Checkout SCM') {
     steps {
-      git branch: 'develop',
+      git branch: '${env.ENVIRONMENT}',
       url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
       }
     }
@@ -44,4 +45,9 @@ pipeline {
       }
     }
   }
+  post {
+      always {
+        cleanWs()
+      }
+    }
 }
