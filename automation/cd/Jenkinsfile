@@ -21,18 +21,18 @@ pipeline {
     }
     stage('Checkout') {
       steps {
-          dir("infra") {
             git branch: 'develop',
             url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
-        }
       }
     }
 
     stage('Plan') {
       steps {
-        sh 'terraform init -input=false'
-        sh "terraform plan -input=false -out tfplan"
-        sh 'terraform show -no-color tfplan > tfplan.txt'
+        dir("infra/terraform") {
+          sh 'terraform init -input=false'
+          sh "terraform plan -input=false -out tfplan"
+          sh 'terraform show -no-color tfplan > tfplan.txt'
+        }
       }
     }
 
@@ -41,9 +41,11 @@ pipeline {
       when { expression { !params.autoApprove } }
       steps {
         script {
-          def plan = readFile 'tfplan.txt'
-          input message: "Apply Terraform plan?",
-          parameters: [text(name: 'Plan', description: 'Review', defaultValue: plan)]
+          dir("infra/terraform") {
+            def plan = readFile 'tfplan.txt'
+            input message: "Apply Terraform plan?",
+            parameters: [text(name: 'Plan', description: 'Review', defaultValue: plan)]
+          }
         }
       }
    }
@@ -52,7 +54,9 @@ pipeline {
       /* Apply plan when destroy is False */
       when { expression { !params.destroy } }
       steps {
-        sh "terraform apply -input=false tfplan"
+        dir("infra/terraform") {
+          sh "terraform apply -input=false tfplan"
+        }
       }
     }
 
@@ -60,7 +64,9 @@ pipeline {
       /* Destroy if flag is true */
       when { expression { params.destroy } }
       steps {
-        sh "terraform destroy --auto-approve"
+        dir("infra/terraform") {
+          sh "terraform destroy --auto-approve"
+        }
       }
     }
   }
