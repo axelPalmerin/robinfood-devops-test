@@ -16,7 +16,7 @@ pipeline {
     /* Clone de repo */
     stage('Checkout SCM') {
       steps {
-        git branch: '${env.BRANCH_NAME}',
+        git branch: 'develop',
         url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
       }
     }
