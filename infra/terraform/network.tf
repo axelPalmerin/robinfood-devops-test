@@ -54,6 +54,7 @@ resource "aws_route_table_association" "vpc_us_east_1a_public" {
     route_table_id = aws_route_table.vpc_us_east_1a_public.id
 }
 
+# SG for allow http
 resource "aws_security_group" "allow_http" {
   name        = "allow_http_sg"
   description = "Allow http inbound connections"
