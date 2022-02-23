@@ -1,0 +1,73 @@
+/* Jenkins declarative CD pipeline */
+
+pipeline {
+  agent { label 'slaveNode1'}
+
+  parameters {
+    booleanParam(name: 'autoApprove', defaultValue: false,
+      description: 'Atomaticamente publicar el plan de terraform?')
+    booleanParam(name: 'destroy', defaultValue: false,
+      description: 'Destruir el plan de terraform')
+  }
+  /* AWS credentials previosly setted on slave node */
+  /*environment {
+     AWS_ACCESS_KEY_ID
+     AWS_SECRET_ACCESS_KEY
+  }*/
+
+  stages {
+    stage('Clean workspace') {
+      steps { cleanWs() }
+    }
+    stage('Checkout') {
+      steps {
+            git branch: 'develop',
+            url: 'git@github.com:axelPalmerin/robinfood-devops-test.git'
+      }
+    }
+
+    stage('Plan') {
+      steps {
+        dir("infra/terraform") {
+          sh 'terraform init -input=false'
+          sh "terraform plan -input=false -out tfplan"
+          sh 'terraform show -no-color tfplan > tfplan.txt'
+        }
+      }
+    }
+
+    stage('Approval') {
+      /* Review plan and manual apply when Approval is False */
+      when { expression { !params.autoApprove } }
+      steps {
+        script {
+          dir("infra/terraform") {
+            def plan = readFile 'tfplan.txt'
+            input message: "Apply Terraform plan?",
+            parameters: [text(name: 'Plan', description: 'Review', defaultValue: plan)]
+          }
+        }
+      }
+   }
+
+    stage('Apply') {
+      /* Apply plan when destroy is False */
+      when { expression { !params.destroy } }
+      steps {
+        dir("infra/terraform") {
+          sh "terraform apply -input=false tfplan"
+        }
+      }
+    }
+
+    stage('Destroy') {
+      /* Destroy if flag is true */
+      when { expression { params.destroy } }
+      steps {
+        dir("infra/terraform") {
+          sh "terraform destroy --auto-approve"
+        }
+      }
+    }
+  }
+}
