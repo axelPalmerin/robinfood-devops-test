@@ -18,13 +18,13 @@ will be deployed a microservice using DevOps methodologies into AWS Cloud.</p>
 
 ### Project Description
 
-<p>The <i>Python microservice</i> execute a series of installed packages checks over a host, eather remote or local host. Those automated test can be useful for testing small units in a compute-engine services and infra, docker-images packages or even virtual envs dependencies.</p>
+<p>The <i>Python microservice</i> executes a bounch of packages checks over a host, eather remote or local. Those automated test can be useful for testing infra, services and packages.</p>
 
-<p>The microservice is builded, packaged and deployed are orchested with <i>Jenkins CI/CD declarative pipeline</i> within a slave node.</p>
+<p>The microservice is builded and packaged with <i>Jenkins CI declarative pipeline</i> within a slave node.</p>
 
-<p>For the delivery flow (CD pipeline) we have using <i>Terraform</i> for building the <i>ECS cluster</i> with its service, task and networks layers to serve and run the microservice.</p>
+<p>Terraform and Jenkins CD pipeline technologies were used for the delivery flow (infra provisioning and artifact delivery) for building the <i>ECS cluster</i>.
 
-<p>Once service is in running state, service's logs are sended to a <i>Cloud Watch engine</i> to finally terminate the proccess.</p>
+<p>Service's logs are sended to <i>Cloud Watch</i>, then proccess finished.</p>
 
 ### Project tree
 
