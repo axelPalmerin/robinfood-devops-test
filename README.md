@@ -68,8 +68,6 @@ https://hub.docker.com/repository/docker/axelherrera/pytest
 
 <p>The microservice is written in python using the pytest serverspec. </p>
 
-[pytest-testinfra](https://testinfra.readthedocs.io/en/latest/)
-
 > For 3rd dependency management and project isolation we've been used pip-tools and virtualenv
 
 #### Usage:
@@ -210,4 +208,10 @@ Logs
 
 <img src="https://github.com/axelPalmerin/images/blob/main/cd.png?raw=true" width="500"/><br>
 
-<p><i>Happy coding! :D</i></p>
+<p><b><i>Happy coding! :D</i></b></p>
+
+### References
+
+* [AWS ECS](https://aws.amazon.com/es/ecs/)
+* [terraform ECS](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_service)
+* [pytest-testinfra](https://testinfra.readthedocs.io/en/latest/)
