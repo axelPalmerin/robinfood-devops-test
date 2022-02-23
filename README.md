@@ -22,7 +22,7 @@ will be deployed a microservice using DevOps methodologies into AWS Cloud.</p>
 
 <p>The microservice is builded and packaged with <i>Jenkins CI declarative pipeline</i> within a slave node.</p>
 
-<p>Terraform and Jenkins CD pipeline technologies were used for the delivery flow (infra provisioning and artifact delivery) for building the <i>ECS cluster</i>.
+<p><i>Terraform and Jenkins CD pipeline</i> technologies were used for the delivery flow (infra provisioning and artifact delivery) for building the <i>ECS cluster</i>.
 
 <p>Service's logs are sended to <i>Cloud Watch</i>, then proccess finished.</p>
 
@@ -128,39 +128,39 @@ terraform validate
 terraform plan
 terraform apply --auto-approve
 ```
-> VPC
+VPC
 
-<img src="https://github.com/axelPalmerin/images/blob/main/vpc.png?raw=true" width="400" />
+<img src="https://github.com/axelPalmerin/images/blob/main/vpc.png?raw=true" width="400" /><br>
 
-> ECS
+ECS
 
-<img src="https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true" width="150" />
+<img src="https://github.com/axelPalmerin/images/blob/main/ecs.png?raw=true" width="100"/><br>
 
-> Services
+Services
 
-<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  width="400"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/services.png?raw=true"  width="400" /><br>
 
-> Tasks
+Tasks
 
-<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="400"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="400"/><br>
 
-> Container
+Container
 
-<img src="https://github.com/axelPalmerin/images/blob/main/container.png?raw=true" width="400"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/container.png?raw=true" width="400"/><br>
 
-> CloudWatch
+CloudWatch
 
-<img src="https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true" width="150" />
+<img src="https://github.com/axelPalmerin/images/blob/main/log_group.png?raw=true" width="150"/><br>
 
-> Logs
+Logs
 
-<img src="https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true" width="400"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/logs.png?raw=true" width="300"/><br>
 
 ### 3. Automation
 
 > Overview CI/CD
 
-<img src="https://github.com/axelPalmerin/images/blob/main/ppl_drawio.png?raw=true" width="450"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/ppl_drawio.png?raw=true" width="400"/>
 
 
 #### Build service with CI pipeline
@@ -177,23 +177,23 @@ terraform apply --auto-approve
     jenkins/jenkins:lts
 ```
 
-> Then a slave node was configured with Terraform and Docker for run CI/CD flows.
+<p>Then a slave node was configured with Terraform and Docker for run CI/CD flows.</p>
 
 
-<img src="https://github.com/axelPalmerin/images/blob/main/slave.png?raw=true" width="250" />
+<img src="https://github.com/axelPalmerin/images/blob/main/slave.png?raw=true" width="250" /><br>
 
 
-> Once Jenkins jobs are created, we run the CI flow.</p>
+<p>Once Jenkins jobs are created, we run the CI flow.</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" width="350" />
+<img src="https://github.com/axelPalmerin/images/blob/main/jobs.png?raw=true" width="150" />
 
 > File: automation/ci/Jenkinsfile
 
-<img src="https://github.com/axelPalmerin/images/blob/main/ci.png?raw=true" width="600"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/ci.png?raw=true" width="500"/><br>
 
 <p>A Docker image of the service is pulling in the public repository</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" width="250" />
+<img src="https://github.com/axelPalmerin/images/blob/main/docker_repo.png?raw=true" width="160" />
 
 
 #### Deploy service with CD pipeline
@@ -204,8 +204,10 @@ terraform apply --auto-approve
 
 <p>The CD pipeline asks for automatically auto approve the terraform plan and eather keep or destroy the plan.</p>
 
-<img src="https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true" width="200" />
+<img src="https://github.com/axelPalmerin/images/blob/main/cd_args.png?raw=true" width="160" />
 
 > Running the Job:
 
-<img src="https://github.com/axelPalmerin/images/blob/main/cd.png?raw=true" width="700"/>
+<img src="https://github.com/axelPalmerin/images/blob/main/cd.png?raw=true" width="500"/><br>
+
+<p><i>Happy coding! :D</i></p>
