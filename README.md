@@ -140,7 +140,7 @@ Services
 
 Tasks
 
-<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="400"/><br>
+<img src="https://github.com/axelPalmerin/images/blob/main/tasks.png?raw=true" width="300"/><br>
 
 Container
 
